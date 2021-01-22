@@ -1,203 +1,110 @@
 ---
 id: doc1
-title: Style Guide
-sidebar_label: Style Guide
-slug: /
+title: JS相关面试题
+sidebar_label: JS
 ---
+下一篇文章 [next passage.](doc2.md) 
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
 
-## Markdown Syntax
 
-To serve as an example page when styling markdown based Docusaurus sites.
-
-## Headers
-
-# H1 - Create the best documentation
-
-## H2 - Create the best documentation
-
-### H3 - Create the best documentation
-
-#### H4 - Create the best documentation
-
-##### H5 - Create the best documentation
-
-###### H6 - Create the best documentation
 
 ---
 
-## Emphasis
+### 延迟加载JS的方式有哪些？
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
+* 设置`<script>`属性 defer="defer" （脚本将在页面完成解析时执行）
+* 动态创建 script DOM：document.createElement('script');
+* XmlHttpRequest 脚本注入
+* 延迟加载工具 LazyLoad
 
 ---
 
-## Lists
 
-1. First ordered list item
-1. Another item
-   - Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-1. And another item.
+### 异步加载JS的方式有哪些？
 
-* Unordered list can use asterisks
+* 设置`<script>`属性 async="async" （一旦脚本可用，则会异步执行）
+* 动态创建 script DOM：document.createElement('script');
+* XmlHttpRequest 脚本注入
+* 异步加载库 LABjs
+* 模块加载器 Sea.js
 
-- Or minuses
+### JavaScript 中，调用函数有哪几种方式？
 
-+ Or pluses
+* 方法调用模式          Foo.foo(arg1, arg2);
+* 函数调用模式          foo(arg1, arg2);
+* 构造器调用模式        (new Foo())(arg1, arg2);
+* call/applay调用模式   Foo.foo.call(that, arg1, arg2);
+* bind调用模式          Foo.foo.bind(that)(arg1, arg2)();
 
----
 
-## Links
-
-[I'm an inline-style link](https://www.google.com/)
-
-[I'm an inline-style link with title](https://www.google.com/ "Google's Homepage")
-
-[I'm a reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. http://www.example.com/ or <http://www.example.com/> and sometimes example.com (but not on GitHub, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org/
-[1]: http://slashdot.org/
-[link text itself]: http://www.reddit.com/
-
----
-
-## Images
-
-Here's our logo (hover to see the title text):
-
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
-
-Reference-style: ![alt text][logo]
-
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
-
-Images from any folder can be used by providing path to file. Path should be relative to markdown file.
-
-![img](../static/img/logo.svg)
-
----
-
-## Code
+### 简单实现 Function.bind 函数？
 
 ```javascript
-var s = 'JavaScript syntax highlighting';
-alert(s);
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function(that) {
+      var func = this, args = arguments;
+      return function() {
+        return func.apply(that, Array.prototype.slice.call(args, 1));
+      }
+    }
+  }
+  // 只支持 bind 阶段的默认参数：
+  func.bind(that, arg1, arg2)();
+
+  // 不支持以下调用阶段传入的参数：
+  func.bind(that)(arg1, arg2);
 ```
 
-```python
-s = "Python syntax highlighting"
-print(s)
-```
+###  列举一下JavaScript数组和对象有哪些原生方法？
 
-```
-No language indicated, so no syntax highlighting.
-But let's throw in a <b>tag</b>.
-```
+* 数组：
+  - arr.concat(arr1, arr2, arrn);
+  - arr.join(",");
+  - arr.sort(func);
+  - arr.pop();
+  - arr.push(e1, e2, en);
+  - arr.shift();
+  - unshift(e1, e2, en);
+  - arr.reverse();
+  - arr.slice(start, end);            
+  - arr.splice(index, count, e1, e2, en);  
+  - arr.indexOf(el);
+  - arr.includes(el);   // ES6
 
-```js {2}
-function highlightMe() {
-  console.log('This line can be highlighted!');
-}
-```
+* 对象：
+  -  object.hasOwnProperty(prop);     
+  -  object.propertyIsEnumerable(prop);
+  -  object.valueOf();                 
+  -  object.toString();                
+  -  object.toLocaleString();          
+  -  Class.prototype.isPropertyOf(object);  
 
----
+### Array.splice() 与 Array.splice() 的区别？
 
-## Tables
+* slice -- “读取”数组指定的元素，不会对原数组进行修改
+  - 语法：arr.slice(start, end)
+  - start 指定选取开始位置（含）
+  - end 指定选取结束位置（不含）
 
-Colons can be used to align columns.
+ * splice 
+   - “操作”数组指定的元素，会修改原数组，返回被删除的元素
+   - 语法：arr.splice(index, count, [insert Elements])
+   - index 是操作的起始位置
+   - count = 0 插入元素，count > 0 删除元素
+   - [insert Elements] 向数组新插入的元素
 
-| Tables        |      Are      |   Cool |
-| ------------- | :-----------: | -----: |
-| col 3 is      | right-aligned | \$1600 |
-| col 2 is      |   centered    |   \$12 |
-| zebra stripes |   are neat    |    \$1 |
+### JavaScript 对象生命周期的理解？
 
-There must be at least 3 dashes separating each header cell. The outer pipes (|) are optional, and you don't need to make the raw Markdown line up prettily. You can also use inline Markdown.
+* 当创建一个对象时，JavaScript 会自动为该对象分配适当的内存
+* 垃圾回收器定期扫描对象，并计算引用了该对象的其他对象的数量
+* 如果被引用数量为 0，或惟一引用是循环的，那么该对象的内存即可回收
 
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
+### 哪些操作会造成内存泄漏？
 
----
+-  JavaScript 内存泄露指对象在不需要使用它时仍然存在，导致占用的内存不能使用或回收
 
-## Blockquotes
-
-> Blockquotes are very handy in email to emulate reply text. This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-
----
-
-## Inline HTML
-
-<dl>
-  <dt>Definition list</dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
----
-
-## Line Breaks
-
-Here's a line for us to start with.
-
-This line is separated from the one above by two newlines, so it will be a _separate paragraph_.
-
-This line is also a separate paragraph, but... This line is only separated by a single newline, so it's a separate line in the _same paragraph_.
-
----
-
-## Admonitions
-
-:::note
-
-This is a note
-
-:::
-
-:::tip
-
-This is a tip
-
-:::
-
-:::important
-
-This is important
-
-:::
-
-:::caution
-
-This is a caution
-
-:::
-
-:::warning
-
-This is a warning
-
-:::
+-  未使用 var 声明的全局变量
+-  闭包函数(Closures)
+-  循环引用(两个对象相互引用)
+-  控制台日志(console.log)
+-  移除存在绑定事件的DOM元素(IE)

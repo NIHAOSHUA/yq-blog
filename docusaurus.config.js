@@ -1,34 +1,37 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
+  title: '扬俏的Blog',
+  tagline: '记录美好生活',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/index.ico',
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: '扬俏的Blog',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/gangqin_1.svg',
       },
-      items: [
-        // {
-        //   to: 'docs/',
-        //   activeBasePath: 'docs',
-        //   label: 'Docs',
-        //   position: 'left',
-        // },
-        //test
-        {to: 'blog', label: 'Blog', position: 'right'},
+      links: [
         {
-          href: 'https://github.com/facebook/docusaurus',
+          to: 'docs/doc1',
+          activeBasePath: 'docs',
+          label: '面试',
+          position: 'right',
+        },
+        {to: 'blog', label: '博客', position: 'right'},
+        {
+          href: 'https://github.com/NIHAOSHUA',
           label: 'GitHub',
           position: 'right',
         },
+        // {
+        //   href: 'https://space.bilibili.com/406252901',
+        //   label: 'Bilibili',
+        //   position: 'right',
+        // },
+        
       ],
     },
     footer: {
@@ -39,11 +42,11 @@ module.exports = {
           items: [
             {
               label: 'Style Guide',
-              to: 'docs/',
+              to: 'docs/doc1',
             },
             {
               label: 'Second Doc',
-              to: 'docs/doc2/',
+              to: 'docs/doc2',
             },
           ],
         },
@@ -58,14 +61,10 @@ module.exports = {
               label: 'Discord',
               href: 'https://discordapp.com/invite/docusaurus',
             },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
           ],
         },
         {
-          title: 'More',
+          title: 'Social',
           items: [
             {
               label: 'Blog',
@@ -73,27 +72,32 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/NIHAOSHUA',
             },
+            // {
+            //   label: 'Bilibili',
+            //   href: 'https://space.bilibili.com/406252901',
+            // },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 扬俏's project, Inc. Built with Docusaurus.`,
+    },
+    algolia: {
+      appId: 'app-id',
+      apiKey: 'api-key',
+      indexName: 'index-name',
+      algoliaOptions: {}, // Optional, if provided by Algolia
     },
   },
   presets: [
     [
       '@docusaurus/preset-classic',
       {
-        // docs: {
-        //   sidebarPath: require.resolve('./sidebars.js'),
-        //   // Please change this to your repo.
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/edit/master/website/',
-        // },
-        blog: {
-          path:"./blog",
-          routeBasePath:"/"
+        docs: {
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl:
+            'https://github.com/facebook/docusaurus/edit/master/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
