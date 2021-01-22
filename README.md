@@ -1,7 +1,6 @@
-# Website
+# 个人博客
 
-使用 [Docusaurus 2](https://v2.docusaurus.io/)构建的个人blog
-已上线[点击访问](https://yq-blog.yangqiao.vercel.app/)
+使用 [Docusaurus 2](https://v2.docusaurus.io/)静态网站生成器构建
 
 ### 安装
 
